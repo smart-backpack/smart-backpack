@@ -4,7 +4,7 @@
  * Released into the public domain.
  */
 
-#include "MFRC522.h"
+#include "RC522.h"
 #include "bcm2835.h"
 #include <linux/types.h>
 #include <stdint.h>
