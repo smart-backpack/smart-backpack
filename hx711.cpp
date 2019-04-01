@@ -4,11 +4,7 @@
 
 #include <wiringPi.h>
 
-
-
 #include "hx711.h"
-
-
 
 HX711::HX711(uint8_t clockPin, uint8_t dataPin, uint8_t skipSetup) :
 
@@ -44,15 +40,11 @@ void HX711::initialize(uint8_t skipSetup){
 
 }
 
-
-
 bool HX711::isReady(){
 
 	return digitalRead(mDataPin) == LOW;
 
 }
-
-
 
 void HX711::setGain(uint8_t gain){
 
@@ -133,7 +125,6 @@ int32_t HX711::read() {
 		digitalWrite(mClockPin, LOW);
 
 	}
-
 
 
 	if(data & 0x800000){
@@ -239,7 +230,6 @@ float HX711::getScale(){
 	return this->mScale;
 
 }
-
 
 
 int main(){
