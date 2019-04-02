@@ -12,7 +12,7 @@ HX711::HX711(uint8_t clockPin, uint8_t dataPin, uint8_t skipSetup) :
 
 	mScale(1.0f),
 
-	mOffset(0),
+	mOffset(1.55),
 
 	mClockPin(clockPin),
 
@@ -167,7 +167,7 @@ int32_t HX711::getRawValue(uint8_t times) {
 
 float HX711::getUnits(uint8_t times) {
 
-	return getRawValue(times) / mScale;
+	return fabs(getRawValue(times) / mScale);
 
 }
 
@@ -240,9 +240,9 @@ int main(){
 
 	sensor.setScale(16000);
 
-	while(true){
+	for(int i=0;i<20;i++){
 
-		printf("%f\n", sensor.getUnits());
+		printf("%f\n", sensor.getUnits(50),1);
 
 		printf("%d\n", sensor.readAverage());
 
