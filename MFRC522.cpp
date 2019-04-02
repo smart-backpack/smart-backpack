@@ -1,8 +1,3 @@
-/*
- * MFRC522.cpp - Library to use ARDUINO RFID MODULE KIT 13.56 MHZ WITH TAGS SPI W AND R BY COOQROBOT.
- * NOTE: Please also check the comments in MFRC522.h - they provide useful hints and background information.
- * Released into the public domain.
- */
 
 #include "MFRC522.h"
 #include "bcm2835.h"
