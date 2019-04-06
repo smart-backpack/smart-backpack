@@ -52,21 +52,21 @@ while(1){
 	      //COMPARING THE RFID TAGS AND COUNTING
 		if(mfrc.uid.uidByte[i] =="5E E7 B1 63")
 		{
-			rd1++;
-			//DISPLAYING THE ITEMS WHETHER IN BAG OR NOT BY EVEN AND ODD COUNT
-			if(rd1%2!=0)
-    			printf("PLACED LAPTOP ");
-   			else
-   			printf("FORGOT LAPTOP");
+			rd1++;	
 		}
 	      else if(mfrc.uid.uidByte[i] =="A1 79 4D 63")
 	      {
-		      rd2++;
-		        if(rd2%2 !=0)
-    			printf("PLACED BOTTLE")
-    			else 
-    			printf("FORGOT TO PLACE BOTTLE IN BAG")
+		      rd2++;	        
 	      }	
+	      //DISPLAYING THE ITEMS WHETHER IN BAG OR NOT BY EVEN AND ODD COUNT
+	      		if(rd1%2!=0)
+    			printf("PLACED LAPTOP ");
+   			else
+   			printf("FORGOT LAPTOP");
+	      		if(rd2%2 !=0)
+    			printf("PLACED BOTTLE");
+    			else 
+    			printf("FORGOT TO PLACE BOTTLE IN BAG");
       }
 
       else{
