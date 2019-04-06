@@ -56,15 +56,15 @@ while(1){
 			//DISPLAYING THE ITEMS WHETHER IN BAG OR NOT BY EVEN AND ODD COUNT
 			if(rd1%2!=0)
     			printf("PLACED LAPTOP ");
-   			else if(rd1%2==0)
+   			else
    			printf("FORGOT LAPTOP");
 		}
 	      else if(mfrc.uid.uidByte[i] =="A1 79 4D 63")
 	      {
 		      rd2++;
-		      else if(rd2%2 !=0)
+		        if(rd2%2 !=0)
     			printf("PLACED BOTTLE")
-    			else if(rd2%2 ==0)
+    			else 
     			printf("FORGOT TO PLACE BOTTLE IN BAG")
 	      }	
       }
