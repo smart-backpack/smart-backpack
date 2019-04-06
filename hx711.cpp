@@ -111,6 +111,9 @@ int main(){
 	for(int i=0;i<20;i++){
 		printf("%f\n", sensor.getUnits(50),1);
 		//printf("%d\n", sensor.readAverage());
+		
+		// printf("<div><h3>weight of the bag is %f kg</h3></div>\n", sensor.getUnits(10));
+                 printf("<p>weight of the bag is %f kg</p>\n", sensor.getUnits(10));
 
 	}
 
