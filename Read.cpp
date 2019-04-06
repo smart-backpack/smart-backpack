@@ -24,39 +24,23 @@ void delay(int ms){
 
 }
 
-
-
 #include "MFRC522.h"
 
-
-
-int main(){
-
-  MFRC522 mfrc;
-
-
-
-  mfrc.PCD_Init();
-
-
-
-  while(1){
-
+int main()
+{
+	int rd1=0,rd2=0;
+ 	 MFRC522 mfrc;
+  	mfrc.PCD_Init();
+while(1){
     // Look for a card
+   
+	if(!mfrc.PICC_IsNewCardPresent())
+	 continue;
+	
+	if( !mfrc.PICC_ReadCardSerial())
+	continue;
 
-    if(!mfrc.PICC_IsNewCardPresent())
-
-      continue;
-
-
-
-    if( !mfrc.PICC_ReadCardSerial())
-
-      continue;
-
-
-
-    // Print UID
+	// Print UID
 
     for(byte i = 0; i < mfrc.uid.size; ++i){
 
@@ -64,8 +48,25 @@ int main(){
 
 	printf(" 0");
 
-	printf("%X",mfrc.uid.uidByte[i]);
-
+	//printf("%X",mfrc.uid.uidByte[i]);
+	      //COMPARING THE RFID TAGS AND COUNTING
+		if(mfrc.uid.uidByte[i]=="5E E7 B1 63")
+		{
+			rd1++;
+			//DISPLAYING THE ITEMS WHETHER IN BAG OR NOT BY EVEN AND ODD COUNT
+			if(rd1%2!=0)
+    			printf("PLACED LAPTOP ");
+   			else if(rd1%2==0)
+   			printf("FORGOT LAPTOP");
+		}
+	      else if(mfrc.uid.uidByte[i]=="A1 79 4D 63")
+	      {
+		      rd2++;
+		      else if(rd2%2!=0)
+    			printf("PLACED BOTTLE")
+    			else if(rd2%2==0)
+    			printf("FORGOT TO PLACE BOTTLE IN BAG")
+	      }	
       }
 
       else{
@@ -75,9 +76,6 @@ int main(){
 	printf("%X", mfrc.uid.uidByte[i]);
 
       }
-
-      
-
     }
 
     printf("\n");
