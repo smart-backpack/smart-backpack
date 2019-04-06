@@ -1,83 +1,66 @@
 #include <inttypes.h>
 
-
-
 #ifndef _HX711_H_
 
 #define _HX711_H_
-
-
 
 //channel A, gain 128
 
 #define GAIN_128 128
 
-
-
 //channel A, gain 64
 
 #define GAIN_64 64
-
-
 
 //channel B, gain 32
 
 #define GAIN_32 32
 
-
-
 class HX711{
 
-private:
+	private:
+		uint8_t mGainBits;
+	
+			float mScale;
+	
+			int32_t mOffset;
 
-	uint8_t mGainBits;
+			uint8_t mClockPin;
 
-	float mScale;
+			uint8_t mDataPin;
 
-	int32_t mOffset;
+	public:
 
+		HX711(uint8_t clockPin, uint8_t dataPin, uint8_t skipSetup);
 
+		void initialize(uint8_t skipSetup);
 
-	uint8_t mClockPin;
+		bool isReady();
 
-	uint8_t mDataPin;
+		void setGain(uint8_t gain);
 
+		int32_t read();
 
+		int32_t readAverage(uint8_t times = 10);
 
-public:
+		int32_t getRawValue(uint8_t times = 10);
 
-	HX711(uint8_t clockPin, uint8_t dataPin, uint8_t skipSetup);
+		float getUnits(uint8_t times = 10);
 
-	void initialize(uint8_t skipSetup);
+		void tare(uint8_t times = 10);
 
-	bool isReady();
+		void setScale(float scale);
 
-	void setGain(uint8_t gain);
+		void setOffset(int32_t offset);
 
-	int32_t read();
+		void powerDown();
 
-	int32_t readAverage(uint8_t times = 10);
+		void powerUp();
 
-	int32_t getRawValue(uint8_t times = 10);
+		int32_t getOffset();
 
-	float getUnits(uint8_t times = 10);
-
-	void tare(uint8_t times = 10);
-
-	void setScale(float scale);
-
-	void setOffset(int32_t offset);
-
-	void powerDown();
-
-	void powerUp();
-
-	int32_t getOffset();
-
-	float getScale();
+		float getScale();
 
 };
-
-
 
 #endif //_HX711_H_
