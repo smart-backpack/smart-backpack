@@ -52,7 +52,8 @@ while(1){
 		
 	    	strcat(idstr[20],temp);
 
-     		// if(mfrc.uid.uidByte[i] < 0x10){
+     		//if(mfrc.uid.uidByte[i] < 0x10){
+			
 			 
 	     	 if(strcmp(idstr[20],"5EE7B163")==0)
 		{
@@ -71,14 +72,6 @@ while(1){
     			printf("PLACED BOTTLE");
     			else 
     			printf("FORGOT TO PLACE BOTTLE IN BAG");
-      }
-
-      else{
-
-	printf(" ");
-
-	printf("%X", mfrc.uid.uidByte[i]);
-
       }
     }
 
