@@ -29,10 +29,12 @@ void delay(int ms){
 int main()
 {
 	int rd1=0,rd2=0;
- 	 MFRC522 mfrc;
+	char temp[2];
+	char idstr[20]= {0}; 
+ 	MFRC522 mfrc;
   	mfrc.PCD_Init();
 while(1){
-    // Look for a card
+    	// Look for a card
    
 	if(!mfrc.PICC_IsNewCardPresent())
 	 continue;
@@ -41,16 +43,18 @@ while(1){
 	continue;
 
 	// Print UID
+	
+	printf("/0");
+	
+    	for(byte i = 0; i < mfrc.uid.size; ++i)
+	{	
+		sprintf(temp, "%x",mfrc.uid.uidbyte[i]);
+		
+	    	strcat(idstr[20],temp);
 
-    for(byte i = 0; i < mfrc.uid.size; ++i){
-
-      if(mfrc.uid.uidByte[i] < 0x10){
-
-	printf(" 0");
-
-	//printf("%X",mfrc.uid.uidByte[i]);
-	      //COMPARING THE RFID TAGS AND COUNTING
-		if(mfrc.uid.uidByte[i] =="5E E7 B1 63")
+     		// if(mfrc.uid.uidByte[i] < 0x10){
+			 
+	     	 if(strcmp(idstr[20],"5EE7B163")==0)
 		{
 			rd1++;	
 		}
