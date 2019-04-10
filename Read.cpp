@@ -25,58 +25,99 @@ void delay(int ms){
 }
 
 #include "MFRC522.h"
-
+#include <string.h>
 int main()
 {
-	int rd1=0,rd2=0;
+	int rd1=0,rd2=0,rd3=0,rd4=0,rd5=0,rd6=0;
 	char temp[2];
-	char idstr[20]= {0}; 
+	char idstr[20]; 
  	MFRC522 mfrc;
   	mfrc.PCD_Init();
 while(1){
-    	// Look for a card
-   
+    	// Look for a card 
 	if(!mfrc.PICC_IsNewCardPresent())
 	 continue;
-	
+
 	if( !mfrc.PICC_ReadCardSerial())
 	continue;
 
 	// Print UID
-	
-	printf("/0");
-	
-    	for(byte i = 0; i < mfrc.uid.size; ++i)
-	{	
-		sprintf(temp, "%x",mfrc.uid.uidbyte[i]);
-		
-	    	strcat(idstr[20],temp);
 
-     		//if(mfrc.uid.uidByte[i] < 0x10){
-			
-			 
-	     	 if(strcmp(idstr[20],"5EE7B163")==0)
+	idstr[0]=0;
+    	for(byte i = 0; i <7 ; ++i)
+	{
+	sprintf(temp, "%X",mfrc.uid.uidByte[i]);
+    	strcat(idstr,temp);
+     	}
+	     	 if(int(strcmp(idstr,"499637AB05780"))==0)
 		{
-			rd1++;	
+			rd1++;
 		}
-	      else if(mfrc.uid.uidByte[i] =="A1 79 4D 63")
-	      {
-		      rd2++;	        
-	      }	
+	        else if(int(strcmp(idstr,"494637AB05780"))==0) // if(strcmp(idstr,"A1794D63")==0)
+	        {
+	        	rd2++;
+	        }
+		else if(int(strcmp(idstr,"48F637AB05780"))==0)
+		{
+			rd3++;
+		}
+		else if(int(strcmp(idstr,"48A637AB05780"))==0)
+		{
+			rd4++;
+		}
+		else if(int(strcmp(idstr,"485637AB05780"))==0)
+		{
+			rd5++;
+		}
+		else if(int(strcmp(idstr,"480637AB05780"))==0)
+		{
+			rd6++;
+		}
+
 	      //DISPLAYING THE ITEMS WHETHER IN BAG OR NOT BY EVEN AND ODD COUNT
-	      		if(rd1%2!=0)
-    			printf("PLACED LAPTOP ");
-   			else
-   			printf("FORGOT LAPTOP");
-	      		if(rd2%2 !=0)
-    			printf("PLACED BOTTLE");
-    			else 
-    			printf("FORGOT TO PLACE BOTTLE IN BAG");
-      }
-    }
+			if(rd1>=0)
+			{
+			printf("LAPTOP: ");
+	      			if(rd1%2!=0)
+    				printf("PLACED \n");
+   				else
+   				printf("NOT PLACED \n");
+			}
 
+			if(rd2>=0)
+			{
+			printf("BOTTLE: ");
+	      			if(rd2%2 !=0)
+    				printf("PLACED \n");
+    				else 
+    				printf("NOT PLACED \n");
+			}
+
+			if(rd3>=0)
+			{
+			printf("DIARY : ");
+				if(rd3%2!=0)
+				printf("PLACED \n");
+				else
+				printf("NOT PLACED \n");
+			}
+			if(rd4>=0)
+			{
+			printf("KEYS: ");
+				if(rd4%2!=0)
+				printf("PLACED \n");
+				else
+				printf("NOT PLACED \n");
+			}
+			if(rd5>=0)
+			{
+			printf("CHARGER: ");
+			if(rd5%2!=0)
+			printf("PLACED \n");
+			else
+			printf("NOT PLACED \n\n\n");
+}
     printf("\n");
-
     delay(1000);
 
   }
