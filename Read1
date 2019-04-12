@@ -1,0 +1,179 @@
+#ifdef WIN32
+
+#include <windows.h>
+
+#else
+
+#include <unistd.h>
+
+#endif
+
+
+
+void delay(int ms){
+
+#ifdef WIN32
+
+  Sleep(ms);
+
+#else
+
+  usleep(ms*1000);
+
+#endif
+
+}
+
+#include "MFRC522.h"
+#include <string.h>
+#include <time.h>
+#include <stdlib.h>
+
+int main()
+{
+	int rd1=0,rd2=0,rd3=0,rd4=0,rd5=0,rd6=0;
+	char temp[2];
+	char idstr[20]; 
+ 	MFRC522 mfrc;
+  	mfrc.PCD_Init();
+//for(int x=0; x<7; ++x){
+
+//time_t endwait;
+//time_t start = time(NULL);
+//time_t seconds =10;
+//endwait = start + seconds;
+
+time_t secs = 30 ;
+time_t startTime = time(NULL);
+while(time(NULL) - startTime < secs)
+{
+      
+
+
+
+        
+        // Look for a card 
+	if(!mfrc.PICC_IsNewCardPresent())
+	 continue;
+
+	if( !mfrc.PICC_ReadCardSerial())
+	continue;
+        
+        char y[] = "Placed";
+        char n[] = "Not Placed";
+        
+        printf("LAPTOP: \n");         
+        printf("BOTTLE: \n");                
+        printf("DIARY: \n");               
+        printf("KEYS: \n");              
+        printf("CHARGER: \n"); 
+
+	// Print UID
+
+	idstr[0]=0;
+        for(byte i = 0; i <7 ; ++i)
+	{
+	sprintf(temp, "%X",mfrc.uid.uidByte[i]);
+    	strcat(idstr,temp);
+     	}
+	     	 if(int(strcmp(idstr,"499637AB05780"))==0)
+		{
+			rd1++;
+		}
+	        else if(int(strcmp(idstr,"494637AB05780"))==0) // if(strcmp(idstr,"A1794D63")==0)
+	        {
+	        	rd2++;
+	        }
+		else if(int(strcmp(idstr,"48F637AB05780"))==0)
+		{
+			rd3++;
+		}
+		else if(int(strcmp(idstr,"48A637AB05780"))==0)
+		{
+			rd4++;
+		}
+		else if(int(strcmp(idstr,"485637AB05780"))==0)
+		{
+			rd5++;
+		}
+		else if(int(strcmp(idstr,"480637AB05780"))==0)
+		{
+			rd6++;
+		}
+               // system("clear");
+
+	      //DISPLAYING THE ITEMS WHETHER IN BAG OR NOT BY EVEN AND ODD COUNT
+			if(rd1>=0)
+			{
+			// printf("<p>LAPTOP:  ");
+	      			if(rd1%2!=0)
+    				printf("PLACED</p> \n");
+                                //printf("Laptop: %s\n", y );
+   				else
+   				printf("NOT PLACED</p> \n");
+                                //printf("Laptop: %s\n", n );
+                               // fflush( stdout );
+			}
+
+			if(rd2>=0)
+			{
+			//printf("<p>BOTTLE:  ");
+	      			if(rd2%2 !=0)
+    				printf("PLACED</p> \n");
+                                //printf("Bottle: %s\n", y );
+    				else 
+    				printf("NOT PLACED</p> \n");
+                                //printf("Bottle: %s\n", n );
+                                //fflush( stdout );
+			}
+
+			if(rd3>=0)
+			{
+			//printf("<p>DIARY : ");
+				if(rd3%2!=0)
+				printf("PLACED</p> \n");
+                                //printf("Diary: %s\n", y );
+				else
+				printf("NOT PLACED</p> \n");
+                                //printf("Diary: %s\n", n );
+                                //fflush( stdout );
+			}
+			if(rd4>=0)
+			{
+			//printf("<p>KEYS: ");
+				if(rd4%2!=0)
+				printf("PLACED</p> \n");
+                               // printf("Keys: %s\n", y );
+				else
+				printf("NOT PLACED</p> \n");
+                                //printf("Keys: %s\n", n );
+                                //fflush( stdout );
+			}
+			
+                        if(rd5>=0)
+			{
+			printf("<p>CHARGER: ");
+			       if(rd5%2!=0)
+			       printf("PLACED</p> \n");
+                               //printf("charger: %s\n", y );
+			       else
+			       printf("NOT PLACED</p> \n\n\n");
+                               //printf("charger: %s\n", n );
+                              // fflush( stdout );
+                        }
+
+                       
+
+
+    printf("<p></p>\n");
+    delay(1000);
+
+
+
+
+ }
+ 
+
+  return 0;
+
+}
