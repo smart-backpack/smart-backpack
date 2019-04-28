@@ -7,7 +7,7 @@
 HX711::HX711(uint8_t clockPin, uint8_t dataPin, uint8_t skipSetup) :
 	mGainBits(1),
 	mScale(1.0f),
-	mOffset(1.55),
+	mOffset(6),
 	mClockPin(clockPin),
 	mDataPin(dataPin)
 {
@@ -108,12 +108,11 @@ int main(){
 	sensor.tare();
 	sensor.setScale(16000);
 
-	for(int i=0;i<20;i++){
-		printf("%f\n", 142.389* sensor.getUnits(50),1);
+	for(int i=0;i<1;i++){
+//		printf("%f\n",  sensor.getUnits(30),1);
 		//printf("%d\n", sensor.readAverage());
-		
-		// printf("<div><h3>weight of the bag is %f kg</h3></div>\n", sensor.getUnits(10));
-                 printf("<p>weight of the bag is %f kg</p>\n", 142.389*sensor.getUnits(50));
+// printf("<div><h3>weight of the bag is %f kg</h3></div>\n", sensor.getUnits(10))
+printf("<p>Weight of the bag is %f grams</p>\n", 240.0*sensor.getUnits(100));
 
 	}
 
